@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("1")
 public class DomesticAnimal extends Animal {
+
     private String breed;
 
     @Column(name = "prod")

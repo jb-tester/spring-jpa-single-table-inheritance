@@ -17,8 +17,11 @@ public interface AnimalRepository extends CrudRepository<Animal,Long> {
     @Query("select a from Animal a where a.class = WildAnimal")
     List<Animal> allWildAnimals();
 
-    @Query("select a from Animal a where a.class = DomesticAnimal and a.colour = :color")
-    List<DomesticAnimal> findByColor(@Param("color") String color);
+    @Query("select a from Animal a where a.class = :type and a.colour = :color")
+    List<DomesticAnimal> findByColor(@Param("color") String color, @Param("type") int type);
+
+    @Query("select a from Animal a where a.class in (FairyAnimal, WildAnimal)")
+    List<Animal> findByTypes();
 
     List<DomesticAnimal> findByBreed(String breed); // errors are reported
 }

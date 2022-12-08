@@ -25,7 +25,11 @@ public class AnimalService {
             System.out.println(animal);
         }
         System.out.println("=== domestic animals by color");
-        for (DomesticAnimal animal : animalRepository.findByColor("various")) {
+        for (DomesticAnimal animal : animalRepository.findByColor("various", 1)) {
+            System.out.println(animal);
+        }
+        System.out.println("=== fairy and wild animals ");
+        for (Animal animal : animalRepository.findByTypes()) {
             System.out.println(animal);
         }
         System.out.println("domestic animals by breed:");
