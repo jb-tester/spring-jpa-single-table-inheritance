@@ -10,9 +10,10 @@ import java.util.List;
  * *
  * <p>Created by irina on 6/20/2022.</p>
  * <p>Project: spring-jpa-single-table-inheritance</p>
- * <p> 'class' property is not resolved: </p>
- * <p><a href="https://youtrack.jetbrains.com/issue/IDEA-296168">https://youtrack.jetbrains.com/issue/IDEA-296168</a></p>
- * Upd: fixed
+ * <p> 'class' property is not resolved:
+ * <a href="https://youtrack.jetbrains.com/issue/IDEA-296168">IDEA-296168</a> Upd: fixed </p>
+ * <p> JPA QL: discriminator value providing as entity type is reported as error:
+ * <a href="https://youtrack.jetbrains.com/issue/IDEA-366979/JPA-QL-discriminator-value-providing-as-entity-type-is-reported-as-error">IDEA-366979</a></p>
  */
 public interface AnimalRepository extends CrudRepository<Animal, Long> {
     @Query("select a from Animal a where a.class = WildAnimal")
@@ -42,11 +43,13 @@ public interface AnimalRepository extends CrudRepository<Animal, Long> {
     @Query("select e.class from Animal e")
     List getType1();
 
-    @Query("select e from Animal e where e.class = 1")
-    List getType2();
+    // no error in this case:
+    @Query("select e from Animal e where e.class = '1'")
+    List<Animal> getType2();
 
-    @Query("select e from Animal e where type(e) = 2")
-    List getType3();
+    // same error is falsely reported:
+    @Query("select e from Animal e where type(e) = '2'")
+    List<Animal> getType3();
 
     List<DomesticAnimal> findByBreed(String breed); // errors are reported
 }
