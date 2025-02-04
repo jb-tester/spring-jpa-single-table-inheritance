@@ -1,8 +1,6 @@
 package com.example.springJpaSingleTableInheritance;
 
-import org.hibernate.annotations.DiscriminatorFormula;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * *
@@ -65,6 +63,17 @@ public class Animal {
 
     public Long getId() {
         return id;
+    }
+
+    public Animal(Long id, String species, String colour, int average_size, int average_weight) {
+        this.id = id;
+        this.species = species;
+        this.colour = colour;
+        this.average_size = average_size;
+        this.average_weight = average_weight;
+    }
+
+    public Animal() {
     }
 
     @Override

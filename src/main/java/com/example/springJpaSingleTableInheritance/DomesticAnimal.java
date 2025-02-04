@@ -1,8 +1,8 @@
 package com.example.springJpaSingleTableInheritance;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 /**
  * *
@@ -18,6 +18,16 @@ public class DomesticAnimal extends Animal {
 
     @Column(name = "prod")
     private boolean productive;
+
+    public DomesticAnimal(Long id, String species, String colour, int average_size, int average_weight, String breed, boolean productive) {
+        super(id, species, colour, average_size, average_weight);
+        this.breed = breed;
+        this.productive = productive;
+    }
+
+    public DomesticAnimal() {
+
+    }
 
     public String getBreed() {
         return breed;
